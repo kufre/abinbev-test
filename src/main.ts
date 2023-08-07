@@ -7,7 +7,6 @@ import { EnvironmentService } from './configs';
 class Server {
   public static async start(): Promise<void> {
     const app = await NestFactory.create(AppModule);
-
     Server.mountMiddlewares(app);
     Server.swaggerSetup(app);
     await app.listen(EnvironmentService.getValue('PORT'), '0.0.0.0');

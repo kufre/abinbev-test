@@ -11,6 +11,8 @@ export class EnvironmentService {
       db_password: process.env.DB_PASSWORD,
       db_port: Number(process.env.DB_PORT),
       db_user: process.env.DB_USER,
+      node_env: process.env.NODE_ENV,
+      port: Number(process.env.PORT),
     };
   }
 

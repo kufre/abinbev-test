@@ -1,4 +1,5 @@
 export interface EnvironmentVariables {
+  // DB Envs
   db_host?: string;
   db_port: number;
   db_name: string;
@@ -6,5 +7,5 @@ export interface EnvironmentVariables {
   db_password: string;
   // Server Envs
   port?: number;
-  node_env?: string;
+  node_env: string;
 }
