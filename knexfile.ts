@@ -24,32 +24,12 @@ class KnexFile {
         max: 10,
       },
       migrations: {
-        directory: './src/_database/migrations',
+        directory: './src/database/migrations',
         tableName: 'api_migrations',
         extension: 'ts',
       },
       seeds: {
-        directory: './src/_database/seeds',
-        extension: 'ts',
-      },
-    };
-  }
-
-  private static getPgConfig(): ConfigObject {
-    return {
-      client: 'pg',
-      connection: KnexFile.getConnection(),
-      pool: {
-        min: 2,
-        max: 10,
-      },
-      migrations: {
-        directory: './src/_database/migrations',
-        tableName: 'api_migrations',
-        extension: 'ts',
-      },
-      seeds: {
-        directory: './src/_database/seeds',
+        directory: './src/database/seeds',
         extension: 'ts',
       },
     };
