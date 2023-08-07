@@ -6,6 +6,6 @@ export const BookValidation: JSONSchema = {
   properties: {
     title: { type: 'string' },
     edition: { type: 'string' },
-    isbn: { type: 'string' },
+    isbn: { type: 'number' },
   },
 };

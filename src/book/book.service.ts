@@ -18,9 +18,17 @@ export class BookService {
   }
 
   findAll(fetch: FetchBookDto) {
+    const { title, edition } = fetch;
+    const searchCriteria: any = {};
+    if (title != null) {
+      searchCriteria.title = title;
+    }
+    if (edition != null) {
+      searchCriteria.edition = title;
+    }
     let providers: any;
     try {
-      providers = this.bookRepo.findAll(fetch);
+      providers = this.bookRepo.findMany(searchCriteria);
     } catch (e) {
       throw new InternalServerErrorException(
         `Error Fetch Currency: ${e.message}`,
@@ -41,16 +49,17 @@ export class BookService {
     return providers;
   }
 
-  public async update(id: string, updateProviderDto: UpdateBookDto) {
-    let providers: any;
+  public async update(id: string, dto: UpdateBookDto) {
+    let result: any;
+    console.log(dto);
     try {
-      providers = await this.bookRepo.update(id, updateProviderDto);
+      result = await this.bookRepo.update(id, dto);
     } catch (e) {
       throw new InternalServerErrorException(
         `Error Updating Provider: ${e.message}`,
       );
     }
-    return providers;
+    return result;
   }
 
   public async remove(id: string) {

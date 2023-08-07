@@ -26,7 +26,7 @@ export class BookController {
   @Post()
   @ApiResponse({
     status: 201,
-    description: 'The book has been successfully created.',
+    description: 'book successfully created.',
   })
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @ApiResponse({ status: 400, description: 'BadRequest.' })
@@ -40,8 +40,8 @@ export class BookController {
     );
   }
   @Get('/')
+  @ApiResponse({ status: 404, description: 'Not found.' })
   public async findAll(@Query() param: FetchBookDto) {
-    const { title } = param;
     const books = await this.bookService.findAll(param);
     return this.baseService.transformResponse(
       'book Fetch successfully',
@@ -51,34 +51,36 @@ export class BookController {
   }
 
   @Get('/:id')
+  @ApiResponse({ status: 404, description: 'Not found.' })
   public async findOne(@Param('id') id: string) {
-    const provider = await this.bookService.findOne(id);
+    const response = await this.bookService.findOne(id);
     return this.baseService.transformResponse(
       'Book Fetch successfully',
-      provider,
+      response,
       HttpStatus.OK,
     );
   }
 
   @Patch('/:id')
-  public async update(
-    @Param('id') id: string,
-    @Body() updateProvider: UpdateBookDto,
-  ) {
-    const provider = await this.bookService.update(id, updateProvider);
+  @ApiResponse({
+    status: 200,
+    description: 'book successfully updated.',
+  })
+  public async update(@Param('id') id: string, @Body() update: UpdateBookDto) {
+    const response = await this.bookService.update(id, update);
     return this.baseService.transformResponse(
       'book Fetch successfully',
-      provider,
+      response,
       HttpStatus.OK,
     );
   }
 
   @Delete('/:id')
   public async remove(@Param('id') id: string) {
-    const removeProvider = await this.bookService.remove(id);
+    const response = await this.bookService.remove(id);
     return this.baseService.transformResponse(
       'book Remove successfully',
-      removeProvider,
+      response,
       HttpStatus.OK,
     );
   }
